@@ -1,4 +1,4 @@
-cd F:\TempDesktop\1
+" cd F:\TempDesktop\1
 
 
 "enable system clipboard, might disable some function
@@ -67,7 +67,7 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 	"Plug 'luochen1990/rainbow'
 
 	"Syntastic
-	Plug 'scrooloose/syntastic'
+	"Plug 'scrooloose/syntastic'
 	"Plug 'vim-syntastic/syntastic'
 
 	" On-demand loading
@@ -127,14 +127,14 @@ let g:cpp_concepts_highlight = 1
 
 
 "syntastic ####
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 
 
@@ -175,24 +175,23 @@ let g:NERDTreeWinSize = 32
 "cmap <C-V>      <C-R>+
 "cmap <S-Insert>     <C-R>+
 
-
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-    silent exec "w"
-    if &filetype == 'c'
-        silent exec "!gcc -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c2x % -o %<; .\%<"
-        silent exec "!time ./%<"
-    elseif &filetype == 'vim'
-        silent exec "source %"
-    elseif &filetype == 'cpp'
-        set splitbelow
-        silent exec "!g++ -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c++11 % -o %<"
-        :sp
-        ":res -5
-        :AsyncRun -mode=term -pos=external %<
-		:q
-    endif
-endfunc
+"map <F5> :call CompileRunGcc()<CR>
+"func! CompileRunGcc()
+"    silent exec "w"
+"    if &filetype == 'c'
+"        silent exec "!gcc -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c2x % -o %<; .\%<"
+"        silent exec "!time ./%<"
+"    elseif &filetype == 'vim'
+"        silent exec "source %"
+"    elseif &filetype == 'cpp'
+"        set splitbelow
+"        silent exec "!g++ -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c++11 % -o %<"
+"        :sp
+"        ":res -5
+"        :AsyncRun -mode=term -pos=external %<
+"		:q
+"    endif
+"endfunc
 
 
 	
@@ -202,6 +201,10 @@ function! AdjustFontSize(amount)
   :execute "GuiFont! Consolas:h" . s:fontsize
 endfunction
 
+" set esc to clean highlight after search
+nnoremap <esc> :noh<return><esc>
+
+" set key Ctrl +(-) and Ctrl + mouse to adjust font size
 noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
 noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
 inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
