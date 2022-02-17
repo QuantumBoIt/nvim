@@ -38,6 +38,11 @@ set tenc=utf-8
 set guifont=Consolas:h13 "设置字体为Monaco，大小10
 set showtabline=2 "设置显是显示标签栏
 
+"let g:python2_host_prog='/usr/bin/python2'
+let g:python3_host_prog='/usr/bin/python3'
+
+let g:ycm_global_ycm_extra_conf='~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+
 "Plugin related
 call plug#begin('~/.config/nvim/plugged') 
 
@@ -68,7 +73,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 	"Syntastic
 	"Plug 'scrooloose/syntastic'
-	"Plug 'vim-syntastic/syntastic'
+	Plug 'vim-syntastic/syntastic'
 
 	" On-demand loading
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -80,6 +85,11 @@ call plug#begin('~/.config/nvim/plugged')
 	"cpp highlight
 	Plug 'octol/vim-cpp-enhanced-highlight'
 
+    "coc.nvim
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    
+
+    Plug 'honza/vim-snippets'
 
 call plug#end()
 
