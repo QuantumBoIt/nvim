@@ -39,7 +39,7 @@ set guifont=Consolas:h13 "设置字体为Monaco，大小10
 set showtabline=2 "设置显是显示标签栏
 
 "Plugin related
-call plug#begin('~/AppData/Local/nvim/plugged') 
+call plug#begin('~/.config/nvim/plugged') 
 
 	"external termnial
 	Plug 'skywind3000/asyncrun.vim'
@@ -82,6 +82,9 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 
 
 call plug#end()
+
+" set background transparent, must before colorscheme
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 
 set background=dark
 colorscheme gruvbox
