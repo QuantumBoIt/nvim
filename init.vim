@@ -3,7 +3,7 @@
 
 "enable system clipboard, might disable some function
 set clipboard=unnamed
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 
 set mouse=a
@@ -30,7 +30,6 @@ set softtabstop=4
 
 set encoding=utf-8
 set tenc=utf-8
-
 
 
 
@@ -66,7 +65,9 @@ call plug#begin('~/.config/nvim/plugged')
 	"Plug 'altercation/solarized'
 	"Plug 'sainnhe/sonokai'
 	"Plug 'NLKNguyen/papercolor-theme'
+    "Plug 'crusoexia/vim-monokai'
 	Plug 'morhetz/gruvbox'
+
 	
 	"rainbow brackets
 	"Plug 'luochen1990/rainbow'
@@ -110,6 +111,55 @@ let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
+
+" ===================
+" ==== coc begin ====
+let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-tsserver',
+    \ 'coc-snippets',
+    \ 'coc-marketplace']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-o> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+
+" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" ==== coc end   ====
+" ===================
 
 ""rainbow brackets
 "let g:rainbow_active = 1
@@ -198,7 +248,7 @@ let g:NERDTreeWinSize = 32
 "        silent exec "source %"
 "    elseif &filetype == 'cpp'
 "        set splitbelow
-"        silent exec "!g++ -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c++11 % -o %<"
+"        silent exec "!g++ -O2 -ggdb3 -Wall -fomit-frame-pointer -m64 -std=c++14 % -o %<"
 "        :sp
 "        ":res -5
 "        :AsyncRun -mode=term -pos=external %<
